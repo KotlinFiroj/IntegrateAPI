@@ -68,6 +68,11 @@ dependencies {
     kapt ("com.google.dagger:hilt-android-compiler:2.56.2")
 
 
+    implementation(libs.logging.interceptor)
+
+    implementation(libs.moshi.kotlin)
+
+
     implementation(libs.androidx.hilt.navigation.compose)
 
 
