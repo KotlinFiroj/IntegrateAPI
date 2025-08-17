@@ -6,7 +6,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 
-    //id("io.gitlab.arturbosch.detekt") version "1.23.8"
+    // id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.0"
     id("jacoco") // Add JaCoCo plugin
 }
