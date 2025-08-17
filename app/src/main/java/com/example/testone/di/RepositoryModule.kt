@@ -3,24 +3,18 @@ package com.example.testone.di
 import com.example.testone.data.remote.ApiService
 import com.example.testone.data.repository.ListRepositoryImpl
 import com.example.testone.domain.repository.ListRepository
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppData {
+class RepositoryModule {
 
     @Provides
     fun provideListRepository(apiService: ApiService): ListRepository {
         return ListRepositoryImpl(apiService)
     }
-
 
 }

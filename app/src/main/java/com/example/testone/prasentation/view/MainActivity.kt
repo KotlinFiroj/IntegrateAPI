@@ -37,30 +37,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(viewModel: ListViewModel = hiltViewModel()) {
-
-
-    val list by viewModel.list.collectAsState()
-
-    when(list) {
-        is UiState.Loading -> {
-
-        }
-        is UiState.Success<*> -> {
-            LazyColumn {
-
-                items((list as UiState.Success).list) { item ->
-                    Text(item.name)
-                }
-
-            }
-        }
-        is UiState.Failure -> {
-
-        }
-
-    }
-
-
-}

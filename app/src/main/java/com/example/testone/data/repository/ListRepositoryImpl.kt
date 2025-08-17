@@ -1,41 +1,45 @@
 package com.example.testone.data.repository
 
-import com.example.testone.data.ApiService
-import com.example.testone.data.model.ListItem
+import com.example.testone.data.remote.ApiService
+import com.example.testone.data.dto.ListItem
+import com.example.testone.data.mapper.toUser
 import com.example.testone.domain.repository.ListRepository
 import com.example.testone.prasentation.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import java.lang.Exception
+import java.io.IOException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 import kotlin.collections.sortedByDescending
 import kotlin.collections.take
 
 class ListRepositoryImpl @Inject constructor(val apiService: ApiService): ListRepository {
 
-        override suspend fun getUserList(): Flow<UiState<List<ListItem>>> = flow {
+        override suspend fun getUserList(): Flow<UiState> = flow {
             try {
                 emit(UiState.Loading)
                 val response = apiService.getUserList()
                 if(response.isSuccessful) {
                     val data = response.body()
 
-                    data?.let {
-
-                       data.sortedByDescending {
-                           it.name
-                       }
-                        val take = it.take(3)
-                        emit(UiState.Success(take))
+                    val res = data?.let { it.map { it.toUser() }
+                        .sortedBy { it.name }.take(3)
                     }
-                    //emit()
 
+                    emit(UiState.Success(res!!))
                 } else {
                     emit(UiState.Failure(""))
                 }
-            } catch (e: kotlin.Exception) {
+            }
+            catch (e: SocketTimeoutException) {
+                emit(UiState.Failure(e.message ?: "Unknown Exception"))
+            }
+            catch (e: IOException) {
+                emit(UiState.Failure(e.message ?: "Unknown Exception"))
+            }
+            catch (e: Exception) {
                 emit(UiState.Failure(e.message ?: "Unknown Exception"))
             }
         }.flowOn(Dispatchers.IO)

@@ -1,4 +1,4 @@
-package com.example.testone.data.model
+package com.example.testone.data.dto
 
 
 import com.squareup.moshi.Json

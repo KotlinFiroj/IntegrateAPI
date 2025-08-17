@@ -1,9 +1,12 @@
 package com.example.testone.prasentation
 
-sealed class UiState<out T> {
+import com.example.testone.domain.model.UserUI
 
-    object Loading: UiState<Nothing>()
-    data class Success<T>(val list: T): UiState<T>()
-    data class Failure(val message: String): UiState<Nothing>()
+sealed class UiState {
+
+    object Idle: UiState()
+    object Loading: UiState()
+    data class Success(val list: List<UserUI>): UiState()
+    data class Failure(val message: String): UiState()
 
 }
