@@ -2,7 +2,9 @@ package com.example.testone.di
 
 import com.example.testone.data.remote.ApiService
 import com.example.testone.data.repository.ListRepositoryImpl
+import com.example.testone.data.repository.RegistrationRepositoryImpl
 import com.example.testone.domain.repository.ListRepository
+import com.example.testone.domain.repository.RegistrationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +17,10 @@ class RepositoryModule {
     @Provides
     fun provideListRepository(apiService: ApiService): ListRepository {
         return ListRepositoryImpl(apiService)
+    }
+
+    @Provides
+    fun provideRegisterRepo(): RegistrationRepository {
+        return RegistrationRepositoryImpl()
     }
 }
