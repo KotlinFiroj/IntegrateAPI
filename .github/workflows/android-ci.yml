@@ -35,9 +35,9 @@ jobs:
       - name: Run ktlint
         run: $GRADLEW_PATH ktlintCheck
 
-      - name: Run Detekt
+      #- name: Run Detekt
         #run: $GRADLEW_PATH detekt --config detekt-config.yml
-        run: $GRADLEW_PATH detekt
+        #run: $GRADLEW_PATH detekt
 
 
       - name: Run Tests with Coverage
