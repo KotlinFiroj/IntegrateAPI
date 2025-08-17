@@ -113,5 +113,4 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.turbine) // latest as of now
-
 }

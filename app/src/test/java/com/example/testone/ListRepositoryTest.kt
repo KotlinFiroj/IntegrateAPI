@@ -39,7 +39,7 @@ class ListRepositoryTest {
     @Test
     fun `fetch and success`() = runTest {
         // Given
-        val data = ListItem(name = "Name" )
+        val data = ListItem(name = "Name")
         val fakeList = listOf(data)
         coEvery { apiService.getUserList() } returns Response.success(fakeList)
 
@@ -47,7 +47,7 @@ class ListRepositoryTest {
         /*val result = listRepositoryImpl.getUserList()
         advanceUntilIdle()
         assertTrue(result.first() is UiState.Loading)
-        */
+         */
 
         listRepositoryImpl.getUserList().test {
             // first emission
@@ -58,7 +58,6 @@ class ListRepositoryTest {
             assertEquals("Name", (success as UiState.Success).list.first().name)
             awaitComplete()
         }
-
     }
 
     @Test
@@ -67,9 +66,9 @@ class ListRepositoryTest {
         coEvery { apiService.getUserList() } throws mockRes
 
         listRepositoryImpl.getUserList().test {
-            //First emit
+            // First emit
             assertTrue(awaitItem() is UiState.Loading)
-            //Second emit
+            // Second emit
             assertTrue(awaitItem() is UiState.Failure)
             awaitComplete()
         }

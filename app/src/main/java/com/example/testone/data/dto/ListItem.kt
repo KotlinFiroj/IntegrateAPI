@@ -20,5 +20,5 @@ data class ListItem(
     @Json(name = "username")
     val username: String? = null,
     @Json(name = "website")
-    val website: String? = null
+    val website: String? = null,
 )

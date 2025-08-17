@@ -20,9 +20,10 @@ class ListRepositoryImpl @Inject constructor(val apiService: ApiService) : ListR
             val response = apiService.getUserList()
             if (response.isSuccessful) {
                 val data = response.body()
-                    val res = data?.let { it.map { it.toUser() }
-                      //  .sortedBy { it.name }.take(3)
-                    }
+                val res = data?.let {
+                    it.map { it.toUser() }
+                    //  .sortedBy { it.name }.take(3)
+                }
                 emit(UiState.Success(res!!))
             } else {
                 emit(UiState.Failure(""))

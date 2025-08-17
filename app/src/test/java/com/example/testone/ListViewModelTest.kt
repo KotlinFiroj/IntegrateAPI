@@ -20,8 +20,7 @@ import org.junit.Test
 
 class ListViewModelTest {
 
-
-    lateinit var  useCause: ListUseCause
+    lateinit var useCause: ListUseCause
     lateinit var viewModel: ListViewModel
     val testDispatcher = StandardTestDispatcher()
 
@@ -59,7 +58,7 @@ class ListViewModelTest {
     }
 
     @Test
-    fun `fetch return error`() = runTest{
+    fun `fetch return error`() = runTest {
         val mockError = MutableStateFlow(UiState.Failure("Error"))
         coEvery { useCause() } returns mockError
 
@@ -71,9 +70,5 @@ class ListViewModelTest {
         assertTrue(state is UiState.Failure)
         val stateRes = state as UiState.Failure
         assertEquals(mockError.value.message, stateRes.message)
-
-
-
     }
-
 }
