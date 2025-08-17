@@ -2,7 +2,6 @@ package com.example.testone.prasentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.testone.data.dto.ListItem
 import com.example.testone.domain.usecase.ListUseCause
 import com.example.testone.prasentation.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,9 +28,6 @@ class ListViewModel @Inject constructor(val listUseCause: ListUseCause) : ViewMo
                 .collect {
                     _list.value = it
                 }
-
         }
     }
-
-
 }

@@ -1,8 +1,8 @@
 package com.example.testone.di
 
 import com.example.testone.data.remote.ApiService
-import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +12,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -34,10 +33,11 @@ class NetworkModule {
     }
 
     val customInterceptor = Interceptor { chain ->
-        chain.proceed(chain.request().newBuilder().also {
-            it.addHeader("Accept", "application/json")
-        }.build())
-
+        chain.proceed(
+            chain.request().newBuilder().also {
+                it.addHeader("Accept", "application/json")
+            }.build(),
+        )
     }
 
     @Provides
@@ -52,6 +52,4 @@ class NetworkModule {
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
-
-
 }

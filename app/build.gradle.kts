@@ -3,11 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 
-
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 
-    id("io.gitlab.arturbosch.detekt") version "1.23.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.4"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.0"
     id("jacoco") // Add JaCoCo plugin
 }
@@ -31,25 +30,24 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
 }
 
-
 detekt {
-    toolVersion = "1.23.1"
+    toolVersion = "1.23.4"
     config = files("$rootDir/detekt-config.yml")
     buildUponDefaultConfig = true
     parallel = true
@@ -83,7 +81,6 @@ tasks.register<JacocoReport>("jacocoTestReport") {
     executionData.setFrom(files(project.layout.buildDirectory.dir("jacoco/test.exec")))
 }
 
-
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -106,18 +103,13 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.15.2")
 
     implementation("com.google.dagger:hilt-android:2.56.2")
-    kapt ("com.google.dagger:hilt-android-compiler:2.56.2")
-
+    kapt("com.google.dagger:hilt-android-compiler:2.56.2")
 
     implementation(libs.logging.interceptor)
 
     implementation(libs.moshi.kotlin)
 
-
     implementation(libs.androidx.hilt.navigation.compose)
 
-
     implementation(libs.retrofit2.converter.moshi)
-
-
 }

@@ -1,6 +1,5 @@
 package com.example.testone.data.dto
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -15,5 +14,5 @@ data class Address(
     @Json(name = "suite")
     val suite: String,
     @Json(name = "zipcode")
-    val zipcode: String
+    val zipcode: String,
 )

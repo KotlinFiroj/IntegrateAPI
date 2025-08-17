@@ -16,5 +16,4 @@ class RepositoryModule {
     fun provideListRepository(apiService: ApiService): ListRepository {
         return ListRepositoryImpl(apiService)
     }
-
 }

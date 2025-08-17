@@ -1,6 +1,5 @@
 package com.example.testone.data.dto
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -21,5 +20,5 @@ data class ListItem(
     @Json(name = "username")
     val username: String,
     @Json(name = "website")
-    val website: String
+    val website: String,
 )

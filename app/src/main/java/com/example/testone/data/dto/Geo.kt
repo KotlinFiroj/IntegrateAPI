@@ -1,6 +1,5 @@
 package com.example.testone.data.dto
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -9,5 +8,5 @@ data class Geo(
     @Json(name = "lat")
     val lat: String,
     @Json(name = "lng")
-    val lng: String
+    val lng: String,
 )
