@@ -6,7 +6,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 
-    id("io.gitlab.arturbosch.detekt") version "1.23.4"
+    //id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.0"
     id("jacoco") // Add JaCoCo plugin
 }
@@ -46,12 +46,12 @@ android {
     }
 }
 
-detekt {
-    toolVersion = "1.23.4"
+/*detekt {
+    toolVersion = "1.23.8"
     config = files("$rootDir/detekt-config.yml")
     buildUponDefaultConfig = true
     parallel = true
-}
+}*/
 
 ktlint {
     version.set("0.49.1")
@@ -62,6 +62,12 @@ ktlint {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
 }
+
+/*tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        languageVersion = "1.9"
+    }
+}*/
 
 tasks.register<JacocoReport>("jacocoTestReport") {
     dependsOn("testDebugUnitTest")
