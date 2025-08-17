@@ -48,6 +48,7 @@ android {
 
 /*detekt {
     toolVersion = "1.23.8"
+
     config = files("$rootDir/detekt-config.yml")
     buildUponDefaultConfig = true
     parallel = true
