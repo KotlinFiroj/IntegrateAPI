@@ -106,10 +106,12 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.56.2")
 
     implementation(libs.logging.interceptor)
-
     implementation(libs.moshi.kotlin)
-
     implementation(libs.androidx.hilt.navigation.compose)
-
     implementation(libs.retrofit2.converter.moshi)
+
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine) // latest as of now
+
 }

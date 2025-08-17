@@ -1,5 +1,6 @@
 package com.example.testone.data.repository
 
+import com.example.testone.data.mapper.toUser
 import com.example.testone.data.remote.ApiService
 import com.example.testone.domain.repository.ListRepository
 import com.example.testone.prasentation.UiState
@@ -19,10 +20,10 @@ class ListRepositoryImpl @Inject constructor(val apiService: ApiService) : ListR
             val response = apiService.getUserList()
             if (response.isSuccessful) {
                 val data = response.body()
-                    /*val res = data?.let { it.map { it.toUser() }
+                    val res = data?.let { it.map { it.toUser() }
                       //  .sortedBy { it.name }.take(3)
-                    }*/
-                emit(UiState.Success(emptyList()))
+                    }
+                emit(UiState.Success(res!!))
             } else {
                 emit(UiState.Failure(""))
             }

@@ -4,5 +4,5 @@ import com.example.testone.data.dto.ListItem
 import com.example.testone.domain.model.UserUI
 
 fun ListItem.toUser(): UserUI {
-    return UserUI(name = name)
+    return UserUI(name = name ?: "")
 }
