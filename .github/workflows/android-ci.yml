@@ -1,36 +1,67 @@
-# This is a basic workflow to help you get started with Actions
+name: Android CI
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Locate gradlew script
+        id: locate-gradlew
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo "Searching for gradlew..."
+          GRADLEW_PATH=$(find . -name gradlew -type f | head -n 1)
+          echo "Found gradlew at: $GRADLEW_PATH"
+          chmod +x "$GRADLEW_PATH"
+          echo "GRADLEW_PATH=$GRADLEW_PATH" >> $GITHUB_ENV
+
+      - name: Run ktlint
+        run: $GRADLEW_PATH ktlintCheck
+
+      - name: Run Detekt
+        #run: $GRADLEW_PATH detekt --config detekt-config.yml
+        run: $GRADLEW_PATH detekt
+
+
+      - name: Run Tests with Coverage
+        run: $GRADLEW_PATH testDebugUnitTest jacocoTestReport
+
+      - name: Upload Code Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: app/build/reports/jacoco/jacocoTestReport/html
+
+      - name: Upload Detekt Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: detekt-report
+          path: build/reports/detekt
+
+      - name: Find release APK
+        id: find_apk
+        run: |
+          APK_PATH=$(find . -type f -name "*release*.apk" | head -n 1)
+          echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
+          echo "Found APK: $APK_PATH"
+
+      - name: Build Release APK
+        run: $GRADLEW_PATH assembleRelease
+

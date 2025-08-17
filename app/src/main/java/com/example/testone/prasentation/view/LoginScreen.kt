@@ -32,6 +32,7 @@ fun Greeting(viewModel: ListViewModel = hiltViewModel()) {
 
         }
 
+        UiState.Idle -> TODO()
     }
 
 

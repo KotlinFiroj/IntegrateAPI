@@ -6,6 +6,10 @@ plugins {
 
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+
+    id("io.gitlab.arturbosch.detekt") version "1.23.1"
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.0"
+    id("jacoco") // Add JaCoCo plugin
 }
 
 android {
@@ -42,6 +46,43 @@ android {
         compose = true
     }
 }
+
+
+detekt {
+    toolVersion = "1.23.1"
+    config = files("$rootDir/detekt-config.yml")
+    buildUponDefaultConfig = true
+    parallel = true
+}
+
+ktlint {
+    version.set("0.49.1")
+    android.set(true)
+    outputColorName.set("RED")
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+}
+
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn("testDebugUnitTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    val fileFilter = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
+
+    val debugTree = fileTree(project.layout.buildDirectory.dir("intermediates/javac/debug")) {
+        exclude(fileFilter)
+    }
+    classDirectories.setFrom(debugTree)
+    sourceDirectories.setFrom(files("src/main/java"))
+    executionData.setFrom(files(project.layout.buildDirectory.dir("jacoco/test.exec")))
+}
+
 
 dependencies {
 
