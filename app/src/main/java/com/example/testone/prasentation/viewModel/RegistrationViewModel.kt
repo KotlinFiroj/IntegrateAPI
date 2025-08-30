@@ -24,7 +24,7 @@ class RegistrationViewModel @Inject constructor(
     private var currentForm = RegistrationForm("", "", "")
 
     fun onUsernameChanged(username: String) {
-        currentForm = currentForm.copy(username = username)
+        currentForm = currentForm.copy(name = username)
     }
 
     fun onEmailChanged(email: String) {

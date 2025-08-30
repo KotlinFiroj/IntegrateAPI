@@ -29,6 +29,8 @@ fun Greeting(viewModel: ListViewModel = hiltViewModel(), innerPadding: PaddingVa
         is UiState.Failure -> {
         }
 
-        UiState.Idle -> TODO()
+        UiState.Idle -> {
+
+        }
     }
 }

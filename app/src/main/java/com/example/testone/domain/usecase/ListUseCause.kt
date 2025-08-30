@@ -8,8 +8,6 @@ import javax.inject.Inject
 class ListUseCause @Inject constructor(val listRepositoryImpl: ListRepository) {
 
     suspend operator fun invoke(): Flow<UiState> {
-        val data = listRepositoryImpl.getUserList()
-
         return listRepositoryImpl.getUserList()
     }
 }

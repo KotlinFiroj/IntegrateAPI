@@ -1,4 +1,4 @@
-package com.example.testone.prasentation.view
+package com.example.testone.prasentation.view.register
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
