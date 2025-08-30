@@ -3,7 +3,7 @@ package com.example.testone.data.repository
 import com.example.testone.data.mapper.toUser
 import com.example.testone.data.remote.ApiService
 import com.example.testone.domain.repository.ListRepository
-import com.example.testone.prasentation.UiState
+import com.example.testone.prasentation.view.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

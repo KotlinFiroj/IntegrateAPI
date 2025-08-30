@@ -1,4 +1,4 @@
-package com.example.testone
+package com.example.testone.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

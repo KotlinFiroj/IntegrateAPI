@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import com.example.testone.data.dto.ListItem
 import com.example.testone.data.remote.ApiService
 import com.example.testone.data.repository.ListRepositoryImpl
-import com.example.testone.prasentation.UiState
+import com.example.testone.prasentation.view.UiState
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals

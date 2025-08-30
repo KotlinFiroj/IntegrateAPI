@@ -2,7 +2,7 @@ package com.example.testone
 
 import com.example.testone.domain.model.UserUI
 import com.example.testone.domain.usecase.ListUseCause
-import com.example.testone.prasentation.UiState
+import com.example.testone.prasentation.view.UiState
 import com.example.testone.prasentation.viewModel.ListViewModel
 import io.mockk.coEvery
 import io.mockk.mockk

@@ -3,7 +3,7 @@ package com.example.testone
 import com.example.testone.domain.model.UserUI
 import com.example.testone.domain.repository.ListRepository
 import com.example.testone.domain.usecase.ListUseCause
-import com.example.testone.prasentation.UiState
+import com.example.testone.prasentation.view.UiState
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.MutableStateFlow

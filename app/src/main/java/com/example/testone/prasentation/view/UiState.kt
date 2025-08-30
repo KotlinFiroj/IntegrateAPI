@@ -1,4 +1,4 @@
-package com.example.testone.prasentation
+package com.example.testone.prasentation.view
 
 import com.example.testone.domain.model.UserUI
 

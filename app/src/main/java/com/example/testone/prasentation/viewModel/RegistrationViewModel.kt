@@ -21,7 +21,7 @@ class RegistrationViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<RegisterState>(RegisterState.Idle)
     val uiState: StateFlow<RegisterState> = _uiState
 
-    private var currentForm = RegistrationForm("", "", "")
+    private var currentForm = RegistrationForm("Five", "Five@gmail.com", "Five@1234")
 
     fun onUsernameChanged(username: String) {
         currentForm = currentForm.copy(name = username)

@@ -1,4 +1,4 @@
-package com.example.testone.prasentation.view
+package com.example.testone.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,8 +17,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             // TestOneTheme {
-            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                Greeting(innerPadding = innerPadding)
+            Scaffold(modifier = Modifier.Companion.fillMaxSize()) { innerPadding ->
+                //Greeting(innerPadding = innerPadding)
                 RegistrationScreen(innerPadding = innerPadding)
             }
             // }
