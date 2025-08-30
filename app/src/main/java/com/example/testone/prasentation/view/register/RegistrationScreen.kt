@@ -20,11 +20,13 @@ import com.example.testone.prasentation.viewModel.RegistrationViewModel
 fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel(), innerPadding: PaddingValues) {
     val state by viewModel.uiState.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize(),
+    Column(
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center) {
+        verticalArrangement = Arrangement.Center,
+    ) {
         OutlinedTextField(
-            //value = viewModel.isFormValid().toString(), // just for demo
+            // value = viewModel.isFormValid().toString(), // just for demo
             value = "", // just for demo
             onValueChange = viewModel::onUsernameChanged,
             label = { Text("Username") },
@@ -42,8 +44,8 @@ fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel(), inner
 
         Button(
             onClick = viewModel::onSaveClicked,
-            //enabled = viewModel.isFormValid() && state !is RegisterState.Loading,
-            //enabled = viewModel.isFormValid() && state !is RegisterState.Loading,
+            // enabled = viewModel.isFormValid() && state !is RegisterState.Loading,
+            // enabled = viewModel.isFormValid() && state !is RegisterState.Loading,
         ) {
             Text("Save")
         }

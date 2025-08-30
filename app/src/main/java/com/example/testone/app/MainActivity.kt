@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             // TestOneTheme {
             Scaffold(modifier = Modifier.Companion.fillMaxSize()) { innerPadding ->
-                //Greeting(innerPadding = innerPadding)
+                // Greeting(innerPadding = innerPadding)
                 RegistrationScreen(innerPadding = innerPadding)
             }
             // }
