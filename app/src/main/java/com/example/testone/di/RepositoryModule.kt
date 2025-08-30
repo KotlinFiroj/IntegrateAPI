@@ -20,7 +20,7 @@ class RepositoryModule {
     }
 
     @Provides
-    fun provideRegisterRepo(): RegistrationRepository {
-        return RegistrationRepositoryImpl()
+    fun provideRegisterRepo(apiService: ApiService): RegistrationRepository {
+        return RegistrationRepositoryImpl(apiService)
     }
 }
