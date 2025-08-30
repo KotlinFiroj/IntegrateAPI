@@ -13,13 +13,9 @@ interface ApiService {
     @GET("users")
     suspend fun getUserList(): Response<List<ListItem>>
 
-
     @POST("register.php")
     suspend fun register(@Body registrationForm: RegistrationForm): Response<RegisterStatus>
 
     @GET("")
     suspend fun getAuthUser()
-
-    
-
 }

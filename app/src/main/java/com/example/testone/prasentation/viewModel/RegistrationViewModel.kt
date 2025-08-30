@@ -6,7 +6,7 @@ import com.example.testone.domain.model.RegistrationForm
 import com.example.testone.domain.usecase.ForgotPasswordUseCase
 import com.example.testone.domain.usecase.SaveRegistrationUseCase
 import com.example.testone.domain.usecase.ValidateRegistrationFormUseCase
-import com.example.testone.prasentation.RegistrationUiState
+import com.example.testone.prasentation.view.register.RegisterState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -18,8 +18,8 @@ class RegistrationViewModel @Inject constructor(
     private val forgotPassword: ForgotPasswordUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<RegistrationUiState>(RegistrationUiState.Idle)
-    val uiState: StateFlow<RegistrationUiState> = _uiState
+    private val _uiState = MutableStateFlow<RegisterState>(RegisterState.Idle)
+    val uiState: StateFlow<RegisterState> = _uiState
 
     private var currentForm = RegistrationForm("", "", "")
 
@@ -39,25 +39,21 @@ class RegistrationViewModel @Inject constructor(
 
     fun onSaveClicked() {
         viewModelScope.launch {
-            _uiState.value = RegistrationUiState.Loading
-            val success = saveRegistration(currentForm)
-            _uiState.value = if (success) {
-                RegistrationUiState.RegistrationSuccess("Registration successful!")
-            } else {
-                RegistrationUiState.RegistrationError("Registration failed.")
+            saveRegistration(currentForm).collect {
+                _uiState.value = it
             }
         }
     }
 
     fun onForgotPasswordClicked() {
         viewModelScope.launch {
-            _uiState.value = RegistrationUiState.Loading
+            _uiState.value = RegisterState.Loading
             val success = forgotPassword(currentForm.email)
-            _uiState.value = if (success) {
+            /*_uiState.value = if (success) {
                 RegistrationUiState.ForgotPasswordSuccess("Password reset link sent!")
             } else {
                 RegistrationUiState.ForgotPasswordError("Email not found.")
-            }
+            }*/
         }
     }
 }

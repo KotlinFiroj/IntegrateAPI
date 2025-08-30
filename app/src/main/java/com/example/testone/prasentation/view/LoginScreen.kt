@@ -30,7 +30,6 @@ fun Greeting(viewModel: ListViewModel = hiltViewModel(), innerPadding: PaddingVa
         }
 
         UiState.Idle -> {
-
         }
     }
 }

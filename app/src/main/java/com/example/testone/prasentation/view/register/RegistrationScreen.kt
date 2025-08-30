@@ -12,7 +12,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.testone.prasentation.RegistrationUiState
 import com.example.testone.prasentation.viewModel.RegistrationViewModel
 
 @Composable
@@ -38,7 +37,7 @@ fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel(), inner
 
         Button(
             onClick = viewModel::onSaveClicked,
-            enabled = viewModel.isFormValid() && state !is RegistrationUiState.Loading,
+            enabled = viewModel.isFormValid() && state !is RegisterState.Loading,
         ) {
             Text("Save")
         }
@@ -48,16 +47,12 @@ fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel(), inner
         }
 
         when (state) {
-            is RegistrationUiState.Loading -> Text("Loading...")
-            is RegistrationUiState.RegistrationSuccess ->
-                Text((state as RegistrationUiState.RegistrationSuccess).message)
-            is RegistrationUiState.RegistrationError ->
-                Text((state as RegistrationUiState.RegistrationError).error)
-            is RegistrationUiState.ForgotPasswordSuccess ->
-                Text((state as RegistrationUiState.ForgotPasswordSuccess).message)
-            is RegistrationUiState.ForgotPasswordError ->
-                Text((state as RegistrationUiState.ForgotPasswordError).error)
-            RegistrationUiState.Idle -> {} // do nothing
+            is RegisterState.Loading -> Text("Loading...")
+            is RegisterState.Success ->
+                Text((state as RegisterState.Success).message.message)
+            is RegisterState.Error ->
+                Text((state as RegisterState.Error).error)
+            RegisterState.Idle -> {} // do nothing
         }
     }
 }
