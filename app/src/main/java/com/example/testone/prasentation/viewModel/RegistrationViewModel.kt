@@ -7,11 +7,13 @@ import com.example.testone.domain.usecase.ForgotPasswordUseCase
 import com.example.testone.domain.usecase.SaveRegistrationUseCase
 import com.example.testone.domain.usecase.ValidateRegistrationFormUseCase
 import com.example.testone.prasentation.view.register.RegisterState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val validateForm: ValidateRegistrationFormUseCase,
     private val saveRegistration: SaveRegistrationUseCase,
