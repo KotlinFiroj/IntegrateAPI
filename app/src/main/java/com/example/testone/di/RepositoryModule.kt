@@ -1,6 +1,7 @@
 package com.example.testone.di
 
 import com.example.testone.data.remote.ApiService
+import com.example.testone.data.remote.RegisterService
 import com.example.testone.data.repository.ListRepositoryImpl
 import com.example.testone.data.repository.RegistrationRepositoryImpl
 import com.example.testone.domain.repository.ListRepository
@@ -20,7 +21,7 @@ class RepositoryModule {
     }
 
     @Provides
-    fun provideRegisterRepo(apiService: ApiService): RegistrationRepository {
-        return RegistrationRepositoryImpl(apiService)
+    fun provideRegisterRepo(registerService: RegisterService): RegistrationRepository {
+        return RegistrationRepositoryImpl(registerService)
     }
 }

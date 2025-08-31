@@ -2,7 +2,6 @@ package com.example.testone.prasentation.view.register
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -17,7 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.testone.prasentation.viewModel.RegistrationViewModel
 
 @Composable
-fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel(), innerPadding: PaddingValues) {
+fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsState()
 
     Column(
@@ -50,6 +49,12 @@ fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel(), inner
             Text("Save")
         }
 
+        TextButton(onClick = {
+            viewModel.onUserLogin()
+        }) {
+            Text("Login")
+        }
+
         TextButton(onClick = { viewModel.onForgotPasswordClicked() }) {
             Text("Forgot Password?")
         }
@@ -58,9 +63,13 @@ fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel(), inner
             is RegisterState.Loading -> Text("Loading...")
             is RegisterState.Success ->
                 Text((state as RegisterState.Success).message.message)
+
+
+
             is RegisterState.Error ->
                 Text((state as RegisterState.Error).error)
             RegisterState.Idle -> {} // do nothing
+            RegisterState.Login -> Text("Login...")
         }
     }
 }

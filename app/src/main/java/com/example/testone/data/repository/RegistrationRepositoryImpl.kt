@@ -1,6 +1,6 @@
 package com.example.testone.data.repository
 
-import com.example.testone.data.remote.ApiService
+import com.example.testone.data.remote.RegisterService
 import com.example.testone.domain.model.RegistrationForm
 import com.example.testone.domain.repository.RegistrationRepository
 import com.example.testone.prasentation.view.register.RegisterState
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 import java.io.IOException
 import java.net.SocketTimeoutException
 
-class RegistrationRepositoryImpl @Inject constructor(val apiService: ApiService) :
+class RegistrationRepositoryImpl @Inject constructor(val apiService: RegisterService) :
     RegistrationRepository {
     override suspend fun saveRegistration(form: RegistrationForm) = flow {
         emit(RegisterState.Loading)
