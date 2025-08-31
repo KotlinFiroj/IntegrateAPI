@@ -8,5 +8,4 @@ interface ApiService {
 
     @GET("users")
     suspend fun getUserList(): Response<List<ListItem>>
-
 }

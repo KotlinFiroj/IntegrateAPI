@@ -64,8 +64,6 @@ fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel()) {
             is RegisterState.Success ->
                 Text((state as RegisterState.Success).message.message)
 
-
-
             is RegisterState.Error ->
                 Text((state as RegisterState.Error).error)
             RegisterState.Idle -> {} // do nothing

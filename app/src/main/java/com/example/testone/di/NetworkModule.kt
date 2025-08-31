@@ -19,11 +19,9 @@ import javax.inject.Qualifier
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class UserUrl
-
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
@@ -36,7 +34,6 @@ class NetworkModule {
     @Provides
     @UserUrl
     fun providesUserUrl() = "https://jsonplaceholder.typicode.com/"*/
-
 
     @UserUrl
     @Provides
@@ -62,8 +59,6 @@ class NetworkModule {
             .build()
     }
 
-
-
     val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -88,6 +83,7 @@ class NetworkModule {
     fun provideApiService(@UserUrl retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
+
     @Provides
     fun provideRegisterService(@PhpUrl retrofit: Retrofit): RegisterService {
         return retrofit.create(RegisterService::class.java)

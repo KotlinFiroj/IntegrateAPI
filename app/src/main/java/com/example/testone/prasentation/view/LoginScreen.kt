@@ -17,58 +17,51 @@ import com.example.testone.app.ui.theme.loginBG
 
 @Composable
 fun LoadLogin() {
-
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
-
         ConstraintLayout(modifier = Modifier.padding(8.dp)) {
-
             val (card, userName, password, loginButton) = createRefs()
-            Box(modifier = Modifier.background(color = loginBG)
-                .constrainAs(card) {
-                    start.linkTo(parent.start)
-                    top.linkTo(parent.top)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom)
-
-                }) {
-
-
+            Box(
+                modifier = Modifier.background(color = loginBG)
+                    .constrainAs(card) {
+                        start.linkTo(parent.start)
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                    },
+            ) {
             }
 
             Text(
                 modifier = Modifier.padding(8.dp)
-                    .constrainAs(userName){
+                    .constrainAs(userName) {
                         top.linkTo(card.top, 8.dp)
                         start.linkTo(card.start, 8.dp)
                     },
-                text = "Username")
+                text = "Username",
+            )
 
-            Text(modifier = Modifier.padding(8.dp)
-                .constrainAs(password){
-                    start.linkTo(userName.start)
-                    top.linkTo(userName.bottom, 8.dp)
-                },
+            Text(
+                modifier = Modifier.padding(8.dp)
+                    .constrainAs(password) {
+                        start.linkTo(userName.start)
+                        top.linkTo(userName.bottom, 8.dp)
+                    },
 
-                text = "Password")
+                text = "Password",
+            )
 
-            Button(modifier = Modifier.padding(8.dp)
-                .constrainAs(loginButton) {
-                    start.linkTo(userName.start)
-                    top.linkTo(password.bottom, 8.dp)
-                },
-                onClick = {})
-            { Text(text = "Login") }
-
-
-
-
+            Button(
+                modifier = Modifier.padding(8.dp)
+                    .constrainAs(loginButton) {
+                        start.linkTo(userName.start)
+                        top.linkTo(password.bottom, 8.dp)
+                    },
+                onClick = {},
+            ) { Text(text = "Login") }
         }
-
-
     }
-
 }

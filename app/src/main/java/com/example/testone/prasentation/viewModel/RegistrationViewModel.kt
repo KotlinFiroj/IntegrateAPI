@@ -60,9 +60,6 @@ class RegistrationViewModel @Inject constructor(
     }
 
     fun onUserLogin() {
-
         _uiState.value = RegisterState.Login
-
     }
-
 }

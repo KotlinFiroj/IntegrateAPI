@@ -10,5 +10,4 @@ interface RegisterService {
 
     @POST("register.php")
     suspend fun register(@Body registrationForm: RegistrationForm): Response<RegisterStatus>
-
 }

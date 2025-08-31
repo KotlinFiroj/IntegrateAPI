@@ -122,7 +122,5 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.turbine) // latest as of now
 
-
     implementation(libs.androidx.constraintlayout.compose)
-
 }
