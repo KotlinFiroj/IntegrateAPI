@@ -1,16 +1,12 @@
 package com.example.testone.app
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.testone.prasentation.view.LoadLogin
+import androidx.navigation.compose.rememberNavController
 import com.example.testone.prasentation.view.LoadUserList
-import com.example.testone.prasentation.view.register.RegisterState
+import com.example.testone.prasentation.view.loginViewModel.LoadLogin
 import com.example.testone.prasentation.view.register.RegistrationScreen
-import com.example.testone.prasentation.viewModel.RegistrationViewModel
 
 sealed class NavDestinations(val route: String) {
     object Register : NavDestinations("register")
@@ -19,20 +15,38 @@ sealed class NavDestinations(val route: String) {
 }
 
 @Composable
-fun AppNavigator(navController: NavHostController, viewModel: RegistrationViewModel = hiltViewModel()) {
-    val registerState = viewModel.uiState.collectAsState()
-    val startDestination = when (registerState.value) {
+fun AppNavigator() {
+    val navController = rememberNavController()
+    // val registerState by viewModel.uiState.collectAsState()
+
+    /*val startDestination = when (registerState) {
         RegisterState.Login -> NavDestinations.Login.route
         else -> NavDestinations.Register.route
-    }
+    }*/
 
-    NavHost(navController = navController, startDestination = startDestination) {
+    NavHost(navController = navController, startDestination = NavDestinations.Register.route) {
         composable(NavDestinations.Register.route) {
-            RegistrationScreen()
+            RegistrationScreen(
+                onNavLogin = {
+                    navController.navigate(NavDestinations.Login.route) {
+                        popUpTo(NavDestinations.Register.route) {
+                            inclusive = true
+                        }
+                    }
+                },
+            )
         }
 
         composable(NavDestinations.Login.route) {
-            LoadLogin()
+            LoadLogin(
+                onHome = {
+                    navController.navigate(NavDestinations.UserList.route) {
+                        popUpTo(NavDestinations.Login.route) {
+                            inclusive = true
+                        }
+                    }
+                },
+            )
         }
         composable(NavDestinations.UserList.route) {
             LoadUserList()

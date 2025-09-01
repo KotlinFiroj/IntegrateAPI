@@ -23,25 +23,26 @@ class RegistrationViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<RegisterState>(RegisterState.Idle)
     val uiState: StateFlow<RegisterState> = _uiState
 
-    private var currentForm = RegistrationForm("Five", "Five@gmail.com", "Five@1234")
+    private val _currentForm = MutableStateFlow(RegistrationForm("", "", ""))
+    var currentForm: StateFlow<RegistrationForm> = _currentForm
 
     fun onUsernameChanged(username: String) {
-        currentForm = currentForm.copy(name = username)
+        _currentForm.value = _currentForm.value.copy(name = username)
     }
 
     fun onEmailChanged(email: String) {
-        currentForm = currentForm.copy(email = email)
+        _currentForm.value = _currentForm.value.copy(email = email)
     }
 
     fun onPasswordChanged(password: String) {
-        currentForm = currentForm.copy(password = password)
+        _currentForm.value = _currentForm.value.copy(password = password)
     }
 
-    fun isFormValid(): Boolean = validateForm(currentForm)
+    fun isFormValid(): Boolean = validateForm(currentForm.value)
 
     fun onSaveClicked() {
         viewModelScope.launch {
-            saveRegistration(currentForm).collect {
+            saveRegistration(currentForm.value).collect {
                 _uiState.value = it
             }
         }
@@ -50,7 +51,7 @@ class RegistrationViewModel @Inject constructor(
     fun onForgotPasswordClicked() {
         viewModelScope.launch {
             _uiState.value = RegisterState.Loading
-            val success = forgotPassword(currentForm.email)
+            val success = forgotPassword(currentForm.value.email)
             /*_uiState.value = if (success) {
                 RegistrationUiState.ForgotPasswordSuccess("Password reset link sent!")
             } else {

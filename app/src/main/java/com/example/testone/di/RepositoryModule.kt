@@ -3,8 +3,10 @@ package com.example.testone.di
 import com.example.testone.data.remote.ApiService
 import com.example.testone.data.remote.RegisterService
 import com.example.testone.data.repository.ListRepositoryImpl
+import com.example.testone.data.repository.LoginRepoImpl
 import com.example.testone.data.repository.RegistrationRepositoryImpl
 import com.example.testone.domain.repository.ListRepository
+import com.example.testone.domain.repository.LoginRepo
 import com.example.testone.domain.repository.RegistrationRepository
 import dagger.Module
 import dagger.Provides
@@ -23,5 +25,10 @@ class RepositoryModule {
     @Provides
     fun provideRegisterRepo(registerService: RegisterService): RegistrationRepository {
         return RegistrationRepositoryImpl(registerService)
+    }
+
+    @Provides
+    fun provideLoginRepo(registerService: RegisterService): LoginRepo {
+        return LoginRepoImpl(registerService)
     }
 }

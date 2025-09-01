@@ -16,8 +16,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.testone.prasentation.viewModel.RegistrationViewModel
 
 @Composable
-fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel()) {
+fun RegistrationScreen(onNavLogin: () -> Unit, viewModel: RegistrationViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsState()
+    val form by viewModel.currentForm.collectAsState()
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -26,31 +27,30 @@ fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel()) {
     ) {
         OutlinedTextField(
             // value = viewModel.isFormValid().toString(), // just for demo
-            value = "", // just for demo
+            value = form.name, // just for demo
             onValueChange = viewModel::onUsernameChanged,
             label = { Text("Username") },
         )
         OutlinedTextField(
-            value = "",
+            value = form.email,
             onValueChange = viewModel::onEmailChanged,
             label = { Text("Email") },
         )
         OutlinedTextField(
-            value = "",
+            value = form.password,
             onValueChange = viewModel::onPasswordChanged,
             label = { Text("Password") },
         )
 
         Button(
             onClick = viewModel::onSaveClicked,
-            // enabled = viewModel.isFormValid() && state !is RegisterState.Loading,
-            // enabled = viewModel.isFormValid() && state !is RegisterState.Loading,
+            enabled = viewModel.isFormValid() && state !is RegisterState.Loading,
         ) {
             Text("Save")
         }
 
         TextButton(onClick = {
-            viewModel.onUserLogin()
+            onNavLogin()
         }) {
             Text("Login")
         }
@@ -61,13 +61,36 @@ fun RegistrationScreen(viewModel: RegistrationViewModel = hiltViewModel()) {
 
         when (state) {
             is RegisterState.Loading -> Text("Loading...")
-            is RegisterState.Success ->
+            is RegisterState.Success -> {
                 Text((state as RegisterState.Success).message.message)
-
+                onNavLogin()
+            }
             is RegisterState.Error ->
                 Text((state as RegisterState.Error).error)
             RegisterState.Idle -> {} // do nothing
-            RegisterState.Login -> Text("Login...")
+            RegisterState.Login -> {
+                Text("Login...")
+                onNavLogin()
+            }
         }
+
+        // React to registerState changes and trigger navigation
+        /*LaunchedEffect(registerState) {
+            when (registerState) {
+         */
+        /*RegisterState.Login -> navController.navigate(NavDestinations.Login.route)
+            else -> navController.navigate(NavDestinations.Register.route)*/
+        /*
+            RegisterState.Login -> NavDestinations.Login.route
+            else -> NavDestinations.Register.route
+        }
+    }*/
+        // LaunchedEffect(registerState) {
+            /*when (registerState) {
+                RegisterState.Login -> navController.navigate(NavDestinations.Login.route)
+                //RegisterState.Success -> navController.navigate(NavDestinations.UserList.route)
+                else -> {} // No navigation for other states
+            }*/
+        // }
     }
 }
