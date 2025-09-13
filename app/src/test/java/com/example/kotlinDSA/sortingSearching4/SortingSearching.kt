@@ -1,5 +1,32 @@
 package com.example.kotlinDSA.sortingSearching4
 
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class SortingSearchingTest {
+
+    @Test
+    fun testBinarySearch() {
+        val nums = intArrayOf(1, 3, 5, 7, 9, 11)
+        assertEquals(2, binarySearch(nums, 5))
+        assertEquals(-1, binarySearch(nums, 6))
+    }
+
+    @Test
+    fun testSearchRotatedArray() {
+        val nums = intArrayOf(4, 5, 6, 7, 0, 1, 2)
+        assertEquals(4, search(nums, 0))
+        assertEquals(-1, search(nums, 3))
+    }
+
+    @Test
+    fun testMergeSort() {
+        val arr = intArrayOf(5, 2, 9, 1, 5, 6)
+        val sorted = mergeSort(arr)
+        assertEquals(listOf(1, 2, 5, 5, 6, 9), sorted.toList())
+    }
+}
+
 /*
 * 13. Binary Search */
 

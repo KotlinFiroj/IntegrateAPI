@@ -1,8 +1,68 @@
 package com.example.kotlinDSA.kotlinInterviewPrograms6
 
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import org.junit.Test
+
+class KotlinInterviewProgramsTest {
+
+    @Test
+    fun testFactorial() {
+        assertEquals(120, factorial(5))
+        assertEquals(1, factorial(0))
+    }
+
+    @Test
+    fun testFibonacci() {
+        assertEquals(listOf(0, 1, 1, 2, 3), fibonacci(5))
+    }
+
+    @Test
+    fun testIsPrime() {
+        assertEquals(true, isPrime(7))
+        assertEquals(false, isPrime(10))
+    }
+
+    @Test
+    fun testArmstrong() {
+        assertEquals(true, isArmstrong(153))
+        assertEquals(false, isArmstrong(123))
+    }
+
+    @Test
+    fun testPalindromeNumber() {
+        assertEquals(true, isPalindromeNumber(121))
+        assertEquals(false, isPalindromeNumber(123))
+    }
+
+    @Test
+    fun testFindMissingNumber() {
+        assertEquals(4, findMissingNumber(intArrayOf(1, 2, 3, 5)))
+    }
+
+    @Test
+    fun testSecondLargest() {
+        assertEquals(5, secondLargest(intArrayOf(1, 5, 2, 9, 5, 6)))
+    }
+
+    @Test
+    fun testCountWords() {
+        assertEquals(3, countWords("Hello Kotlin World"))
+    }
+
+    @Test
+    fun testCharFrequency() {
+        val result = charFrequency("hello")
+        assertEquals(mapOf('h' to 1, 'e' to 1, 'l' to 2, 'o' to 1), result)
+    }
+
+    @Test
+    fun testReverseWords() {
+        assertEquals("World Kotlin Hello", reverseWords("Hello Kotlin World"))
+    }
+}
 
 /*
 * 1. FizzBuzz (Classic Warmup)*/

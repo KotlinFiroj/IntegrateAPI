@@ -1,5 +1,44 @@
 package com.example.kotlinDSA.dynamicProgramming5
 
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class DynamicProgrammingTest {
+
+    @Test
+    fun testFibonacci() {
+        assertEquals(0, fib(0))
+        assertEquals(1, fib(1))
+        assertEquals(5, fib(5)) // 0,1,1,2,3,5
+    }
+
+    @Test
+    fun testCoinChange() {
+        assertEquals(3, coinChange(intArrayOf(1, 2, 5), 11)) // 5+5+1
+        assertEquals(-1, coinChange(intArrayOf(2), 3))
+    }
+
+    @Test
+    fun testLongestCommonSubsequence() {
+        assertEquals(3, longestCommonSubsequence("abcde", "ace")) // "ace"
+        assertEquals(0, longestCommonSubsequence("abc", "def")) // no common subsequence
+    }
+
+    @Test
+    fun testKnapsack() {
+        val weights = intArrayOf(1, 3, 4, 5)
+        val values = intArrayOf(1, 4, 5, 7)
+        val W = 7
+        assertEquals(9, knapsack(weights, values, W)) // pick items with weight 3 & 4
+    }
+
+    @Test
+    fun testClimbStairs() {
+        assertEquals(2, climbStairs(2)) // [1+1, 2]
+        assertEquals(3, climbStairs(3)) // [1+1+1, 1+2, 2+1]
+    }
+}
+
 /*
 * 16. Fibonacci (Memoization)   */
 

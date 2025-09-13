@@ -124,4 +124,5 @@ dependencies {
     testImplementation(libs.turbine) // latest as of now
 
     implementation(libs.androidx.constraintlayout.compose)
+    testImplementation(kotlin("test"))
 }
